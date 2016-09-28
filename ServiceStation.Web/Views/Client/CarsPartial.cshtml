@@ -1,0 +1,42 @@
+﻿@model ServiceStation.Data.Entities.Client
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Related cars</h4>
+    </div>
+    <div class="panel-body">
+        @if(Model.Cars.Count() != 0)
+        { 
+            <table class="table">
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>VIN</th>
+                    <th>Orders</th>
+                    <th>Actions</th>
+                </tr>
+                @foreach (var car in Model.Cars)
+                {
+                    <tr>
+                        <td>@car.Make</td>
+                        <td>@car.Model</td>
+                        <td>@car.Year</td>
+                        <td>@car.VIN</td>
+                        <td>@car.Orders.Count()</td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", "Car", new { id = car.CarId }, new { @class = "btn btn-default btn-sm btn-info" })
+                            @Html.ActionLink("Edit", "Edit", "Car", new { id = car.CarId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Delete", "Delete", "Car", new { id = car.CarId }, new { @class = "btn btn-default btn-sm" }) | 
+                            @Html.ActionLink("New order", "Create", "Order", new { carId = car.CarId }, new { @class = "btn btn-default btn-sm btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Add new car", "Create", "Car", new { clientId = Model.ClientId }, new { @class = "btn btn-default btn-primary" })
+    </div>
+</div>
+

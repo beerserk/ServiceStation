@@ -1,0 +1,64 @@
+﻿@model ServiceStation.Data.Entities.Car
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+        <h3>Are you sure you want to delete the following car?</h3>
+    </div>
+	<div class="panel-body">
+        <h4>Car</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Owner)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Owner.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Make)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Make)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VIN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VIN)
+            </dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Delete" class="btn btn-default btn-primary" />
+        }
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Back to client card", "Details", "Client", new { id = Model.ClientId }, new { @class = "btn btn-default"})
+    </div>
+</div>

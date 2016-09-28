@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ServiceStation.Data.Entities.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="form-group">
+    @using (Html.BeginForm("Index", "Order"))
+    {
+        <label>Select status:</label>
+        @Html.DropDownList("orderStatus", (IEnumerable<SelectListItem>)ViewBag.StatusList, new { @class = "input-sm"});
+        <input type="submit" value="Filter" class="btn btn-default btn-sm" />
+    }
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+        <h4>Orders list</h4>
+    </div>
+	<div class="panel-body">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Car VIN
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Car.Owner)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.VIN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Owner.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", "Order", new { id = item.OrderId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-sm btn-info" })
+                        @Html.ActionLink("Edit", "Edit", "Order", new { id = item.OrderId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-sm" })
+                        @Html.ActionLink("Delete", "Delete", "Order", new { id = item.OrderId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-sm" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+	<div class="panel-footer">
+    </div>
+</div>
+

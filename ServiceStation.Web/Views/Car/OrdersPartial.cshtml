@@ -1,0 +1,36 @@
+﻿@model ServiceStation.Data.Entities.Car
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Related orders</h4>
+    </div>
+    <div class="panel-body">
+        @if (Model.Orders.Count() != 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                @foreach (var order in Model.Orders.OrderByDescending(o => o.Date))
+                {
+                    <tr>
+                        <td>@order.Date.ToShortDateString()</td>
+                        <td>@order.Amount</td>
+                        <td>@order.Status</td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", "Order", new { id = order.OrderId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-sm btn-info" })
+                            @Html.ActionLink("Edit", "Edit", "Order", new { id = order.OrderId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Delete", "Delete", "Order", new { id = order.OrderId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("New order", "Create", "Order", new { carId = Model.CarId }, new { @class = "btn btn-default btn-primary" })
+    </div>
+</div>

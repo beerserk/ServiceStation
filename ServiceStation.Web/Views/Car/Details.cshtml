@@ -1,0 +1,62 @@
+﻿@model ServiceStation.Data.Entities.Car
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+        <h4>Car details</h4>
+    </div>
+	<div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Owner)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Owner.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Make)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Make)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VIN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VIN)
+            </dd>
+        </dl>
+    </div>
+	<div class="panel-footer">
+        @Html.ActionLink("Edit car data", "Edit", "Car", new { id = Model.CarId, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default btn-primary" })
+    </div>
+</div>
+<hr />
+@Html.Partial("OrdersPartial", Model)
+<p>
+    @Html.ActionLink("Back to client card", "Details", "Client", new { id = Model.ClientId }, new { @class = "btn btn-default" })
+</p>
